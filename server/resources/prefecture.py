@@ -33,3 +33,17 @@ class Prefecture(Resource):
             return make_response(prefecture.to_dict(), 201)
         else:
             return {"message": f"Prefecture {id} not found"}, 404
+        
+    def patch(self, id):
+        data = request.get_json()
+        prefecture = PrefectureModel.query.filter(PrefectureModel.id==id).first()
+        if prefecture:
+            try:
+                for attr in data:
+                    setattr(prefecture, attr, data[attr])
+                db.session.add(prefecture)
+                db.session.commit()
+                return make_response(prefecture.to_dict())
+            except ValueError as e:
+                return {"message": "Prefecture not found"}, 404
+    
