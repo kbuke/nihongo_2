@@ -18,8 +18,12 @@ class CityModel(db.Model, SerializerMixin):
         # one-to-many, where cities are the many
     prefecture_id = db.Column(db.ForeignKey("prefectures.id"))
     prefecture = db.relationship("PrefectureModel", back_populates="cities")
+        # one-to-many where cities are the one
+    businesses = db.relationship("BusinessModel", back_populates="city", lazy="dynamic")
 
     # serialise rules
     serialize_rules = (
         "-prefecture.cities",
+
+        "-businesses.city",
     )

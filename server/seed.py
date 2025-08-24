@@ -1,5 +1,6 @@
 from models.prefecture import PrefectureModel
 from models.city import CityModel
+from models.user import IndividualModel, BusinessModel
 
 from app import app
 from config import db 
@@ -12,6 +13,18 @@ if __name__ == "__main__":
         db.create_all()
 
         print("Begin seeding...")
+
+        print("Seeing users...")
+        kaan_buke=IndividualModel(
+            email="kabuke13@gmail.com",
+            ac_type="individual",
+            first_name="Kaan",
+            last_name="Buke",
+            intro="I hope this works man"
+        )
+        db.session.add_all([kaan_buke])
+        db.session.commit()
+        print("Finished seeding users...")
 
         print("Seeding prefectures...")
         tokyo=PrefectureModel(
