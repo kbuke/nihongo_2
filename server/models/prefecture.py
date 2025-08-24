@@ -14,6 +14,7 @@ class PrefectureModel(db.Model, SerializerMixin):
     # set up relationships
         # one-to-many (where prefecture is the one)
             # prefecture - cities
+    cities = db.relationship("CityModel", back_populates="prefecture", lazy="dynamic")
             # prefecture - businesses
             # prefecture - sites
         # one-to-many (where prefecture is the many)
@@ -22,3 +23,8 @@ class PrefectureModel(db.Model, SerializerMixin):
             # user's wishlist
             # user's visited
             # user's reviews on categories
+    
+    # Serialize rules
+    serialize_rules = (
+        "-cities.prefecture",
+    )
