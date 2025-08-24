@@ -47,3 +47,12 @@ class Prefecture(Resource):
             except ValueError as e:
                 return {"message": "Prefecture not found"}, 404
     
+    def delete(self, id):
+        prefecture = PrefectureModel.query.filter(PrefectureModel.id==id).first()
+        if prefecture:
+            prefecture_name = prefecture.name
+            db.session.delete(prefecture)
+            db.session.commit()
+            return{"message": f"{prefecture_name} deleted"}, 201
+        else:
+            return{"message": "Prefecture not found"}, 404
