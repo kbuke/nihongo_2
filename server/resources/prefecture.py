@@ -25,3 +25,11 @@ class PrefectureList(Resource):
             return new_prefecture.to_dict(), 201
         except ValueError as e:
             return {"message": [str(e)]}, 404
+
+class Prefecture(Resource):
+    def get(self, id):
+        prefecture = PrefectureModel.query.filter(PrefectureModel.id==id).first()
+        if prefecture:
+            return make_response(prefecture.to_dict(), 201)
+        else:
+            return {"message": f"Prefecture {id} not found"}, 404
