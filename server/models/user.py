@@ -22,6 +22,15 @@ class IndividualModel(UserModel):
     last_name = db.Column(db.String, nullable=False)
     intro = db.Column(db.String, nullable=True)
 
+    # set up relations
+        # many-to-many
+    businesses = db.relationship("BusinessModel", back_populates="individuals", secondary="individual_wishlists")
+
+    # serialise rukes
+    serialize_rules = (
+        "-businesses.individuals",
+    )
+
     __mapper_args__ = {
         "polymorphic_identity": "individual",
     }
@@ -43,6 +52,9 @@ class BusinessModel(UserModel):
         # one-to-many w. businesses as the many
     city_id = db.Column(db.ForeignKey("cities.id"))
     city = db.relationship("CityModel", back_populates="businesses")
+        # many-to-many 
+    individuals = db.relationship("IndividualModel", back_populates="businesses", secondary="individual_wishlists")
+
 
     __mapper_args__ = {
         "polymorphic_identity": "business",

@@ -20,10 +20,13 @@ class CityModel(db.Model, SerializerMixin):
     prefecture = db.relationship("PrefectureModel", back_populates="cities")
         # one-to-many where cities are the one
     businesses = db.relationship("BusinessModel", back_populates="city", lazy="dynamic")
+    sites = db.relationship("SiteModel", back_populates="city", lazy="dynamic")
 
     # serialise rules
     serialize_rules = (
         "-prefecture.cities",
 
         "-businesses.city",
+
+        "-businesses.sites",
     )
