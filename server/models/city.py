@@ -21,12 +21,17 @@ class CityModel(db.Model, SerializerMixin):
         # one-to-many where cities are the one
     businesses = db.relationship("BusinessModel", back_populates="city", lazy="dynamic")
     sites = db.relationship("SiteModel", back_populates="city", lazy="dynamic")
+        # many-to-many
+    wishlist = db.relationship("WishlistModel", back_populates="city", secondary="location_business_wishlists")
 
     # serialise rules
     serialize_rules = (
         "-prefecture.cities",
+        "-prefecture.wishlist",
 
         "-businesses.city",
 
-        "-businesses.sites",
+        "-wishlist.city",
+
+        "-sites.city",
     )

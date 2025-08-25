@@ -21,10 +21,14 @@ class PrefectureModel(db.Model, SerializerMixin):
 
         # many-to-many
             # user's wishlist
+    wishlist = db.relationship("WishlistModel", back_populates="prefecture", secondary="location_business_wishlists")
             # user's visited
             # user's reviews on categories
     
     # Serialize rules
     serialize_rules = (
         "-cities.prefecture",
+        "-cities.wishlist",
+
+        "-wishlist.prefecture",
     )

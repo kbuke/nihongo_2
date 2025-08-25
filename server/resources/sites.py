@@ -7,6 +7,10 @@ from models.sites import SiteModel
 from models.city import CityModel
 
 class SitesList(Resource):
+    def get(self):
+        sites = [site.to_dict() for site in SiteModel.query.all()]
+        return sites
+    
     def post(self):
         json = request.get_json()
 

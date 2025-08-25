@@ -15,10 +15,11 @@ class SiteModel(db.Model, SerializerMixin):
     city_id = db.Column(db.ForeignKey("cities.id"))
     city = db.relationship("CityModel", back_populates="sites")
         # many-to-many relationships
-    individuals = db.relationship("IndividualModel", back_populates="sites", secondary="individual_wishlists")
+    wishlist = db.relationship("WishlistModel", back_populates="site", secondary="location_business_wishlists")
     
-
     # serialise rules
     serialize_rules = (
         "-city.sites",
+
+        "-wishlist.site",
     )

@@ -23,13 +23,13 @@ class IndividualModel(UserModel):
     intro = db.Column(db.String, nullable=True)
 
     # set up relations
-        # many-to-many
-    businesses = db.relationship("BusinessModel", back_populates="individuals", secondary="individual_wishlists")
-    sites = db.relationship("SiteModel", back_populates="individuals", secondary="individual_wishlists")
+        # one-to-many (individual = one)
+    wishlists = db.relationship("WishlistModel", back_populates="individual", lazy="dynamic")
 
     # serialise rukes
     serialize_rules = (
-        "-businesses.individuals",
+        "-wishlists.individual",
+        # "-wishlists.prefecture",
     )
 
     __mapper_args__ = {
@@ -54,7 +54,7 @@ class BusinessModel(UserModel):
     city_id = db.Column(db.ForeignKey("cities.id"))
     city = db.relationship("CityModel", back_populates="businesses")
         # many-to-many 
-    individuals = db.relationship("IndividualModel", back_populates="businesses", secondary="individual_wishlists")
+    wishlist = db.relationship("WishlistModel", back_populates="business", secondary="location_business_wishlists")
 
 
     __mapper_args__ = {
@@ -64,4 +64,6 @@ class BusinessModel(UserModel):
     # serialise rules
     serialize_rules=(
         "-city.businesses",
+
+        "-wishlist.business"
     )
