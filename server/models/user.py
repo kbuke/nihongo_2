@@ -25,6 +25,7 @@ class IndividualModel(UserModel):
     # set up relations
         # many-to-many
     businesses = db.relationship("BusinessModel", back_populates="individuals", secondary="individual_wishlists")
+    sites = db.relationship("SiteModel", back_populates="individuals", secondary="individual_wishlists")
 
     # serialise rukes
     serialize_rules = (

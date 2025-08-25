@@ -14,6 +14,9 @@ class SiteModel(db.Model, SerializerMixin):
         # one-to-many where sites are the many
     city_id = db.Column(db.ForeignKey("cities.id"))
     city = db.relationship("CityModel", back_populates="sites")
+        # many-to-many relationships
+    individuals = db.relationship("IndividualModel", back_populates="sites", secondary="individual_wishlists")
+    
 
     # serialise rules
     serialize_rules = (

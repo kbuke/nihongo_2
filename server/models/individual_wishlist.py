@@ -7,4 +7,5 @@ class IndividualWishlistModel(db.Model, SerializerMixin):
 
     id = db.Column(db.Integer, primary_key=True)
     individual_id = db.Column(db.Integer, db.ForeignKey("individuals.id"))
-    business_id = db.Column(db.Integer, db.ForeignKey("businesses.id"))
+    business_id = db.Column(db.Integer, db.ForeignKey("businesses.id"), nullable=True)
+    sites_id = db.Column(db.Integer, db.ForeignKey("sites.id"), nullable=True)
