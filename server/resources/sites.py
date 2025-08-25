@@ -30,3 +30,14 @@ class SitesList(Resource):
             return new_site.to_dict(), 201
         except ValueError as e:
             return {"message": [str(e)]}
+
+class Site(Resource):
+    def delete(self, id):
+        site = SiteModel.query.filter(SiteModel.id==id).first()
+
+        if site:
+            db.session.delete(site)
+            db.session.commit()
+            return {"message": f"Site {id} deleted."}
+        else:
+            return {"message": f"Site {id} does not exist"}, 404
