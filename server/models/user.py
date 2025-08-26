@@ -25,6 +25,7 @@ class IndividualModel(UserModel):
     # set up relations
         # one-to-many (individual = one)
     wishlists = db.relationship("WishlistModel", back_populates="individual", lazy="dynamic")
+    interests = db.relationship("InterestModel", back_populates="individual", secondary="individual_interests")
 
     # serialise rukes
     serialize_rules = (
@@ -54,7 +55,7 @@ class BusinessModel(UserModel):
     city_id = db.Column(db.ForeignKey("cities.id"))
     city = db.relationship("CityModel", back_populates="businesses")
 
-    
+
         # many-to-many 
     wishlist = db.relationship("WishlistModel", back_populates="business", secondary="location_business_wishlists")
 
