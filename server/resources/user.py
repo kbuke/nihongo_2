@@ -90,3 +90,11 @@ class BusinessList(Resource):
     def get(self):
         businesses = [business.to_dict() for business in BusinessModel.query.all()]
         return businesses
+    
+class Business(Resource):
+    def get(self, id):
+        business = BusinessModel.query.filter(BusinessModel.id==id).first()
+        if business:
+            return business.to_dict(), 201
+        else:
+            return {"message": "Business not found."}, 404

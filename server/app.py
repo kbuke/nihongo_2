@@ -2,7 +2,7 @@ from config import api, app
 
 from resources.prefecture import PrefectureList, Prefecture
 from resources.city import CityList
-from resources.user import UserList, User, IndividualList, Individual, BusinessList
+from resources.user import UserList, User, IndividualList, Individual, BusinessList, Business
 from resources.sites import SitesList, Site
 from resources.wishlist import WishlistList
 from resources.location_business_wishlist import LocationBusinessWishlistList
@@ -22,6 +22,7 @@ api.add_resource(User, "/users/<int:id>")
 api.add_resource(IndividualList, "/individuals")
 api.add_resource(Individual, "/individuals/<int:id>")
 api.add_resource(BusinessList, "/businesses")
+api.add_resource(Business, "/businesses/<int:id>")
 
 api.add_resource(SitesList, "/sites")
 api.add_resource(Site, "/sites/<int:id>")
