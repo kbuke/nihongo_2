@@ -59,7 +59,7 @@ class BusinessModel(UserModel):
 
         # many-to-many 
     wishlist = db.relationship("WishlistModel", back_populates="business", secondary="location_business_wishlists")
-
+    interests = db.relationship("InterestModel", back_populates="business", secondary="business_interests")
 
     __mapper_args__ = {
         "polymorphic_identity": "business",
@@ -69,5 +69,8 @@ class BusinessModel(UserModel):
     serialize_rules=(
         "-city.businesses",
 
-        "-wishlist.business"
+        "-wishlist.business",
+
+        "-interests.business",
+        "-interests.individual",
     )

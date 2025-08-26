@@ -20,3 +20,10 @@ class InterestModel(db.Model, SerializerMixin):
 
     # set up relations
     individual = db.relationship("IndividualModel", back_populates="interests", secondary="individual_interests")
+
+    business = db.relationship("BusinessModel", back_populates="interests", secondary="business_interests")
+
+    serialize_rules = (
+        "-individual",
+        "-business",
+    )

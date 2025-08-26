@@ -8,6 +8,8 @@ from resources.wishlist import WishlistList
 from resources.location_business_wishlist import LocationBusinessWishlistList
 from resources.interests import InterestList
 from resources.individual_interests import IndividualInterestLists, IndividualInterest
+from resources.business_interests import BusinessInterestList
+from resources.industry import IndustryList
 
 api.add_resource(PrefectureList, "/prefectures")
 api.add_resource(Prefecture, "/prefectures/<int:id>")
@@ -28,6 +30,10 @@ api.add_resource(InterestList, "/interests")
 
 api.add_resource(IndividualInterestLists, "/individualinterests")
 api.add_resource(IndividualInterest, "/individualinterests/<int:id>")
+
+api.add_resource(BusinessInterestList, "/businessinterests")
+
+api.add_resource(IndustryList, "/industries")
 
 if __name__ == "__main__":
     app.run(port=5555, debug=True)
