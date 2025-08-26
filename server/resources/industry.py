@@ -31,6 +31,23 @@ class Industry(Resource):
             return make_response(industry.to_dict())
         else:
             return {"message": f"Industry {id} not found"}, 404
+    
+    def patch(self, id):
+        data = request.get_json()
+
+        industry = IndustryModel.query.filter(IndustryModel.id==id).first()
+
+        if industry:
+            try:
+                for attr in data:
+                    setattr(industry, attr, data[attr])
+                db.session.add(industry)
+                db.session.commit()
+                return make_response(industry.to_dict())
+            except ValueError as e:
+                return {"message": [str(e)]}
+        else:
+            return{"message": f"Industry {id} not found"}, 404
         
     def delete(self, id):
         industry = IndustryModel.query.filter(IndustryModel.id==id).first()
