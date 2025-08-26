@@ -6,6 +6,10 @@ from config import db
 from models.industry import IndustryModel
 
 class IndustryList(Resource):
+    def get(self):
+        industries = [industry.to_dict() for industry in IndustryModel.query.all()]
+        return industries
+
     def post(self):
         json = request.get_json()
 
