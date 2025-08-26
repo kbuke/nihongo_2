@@ -7,7 +7,7 @@ from resources.sites import SitesList, Site
 from resources.wishlist import WishlistList
 from resources.location_business_wishlist import LocationBusinessWishlistList
 from resources.interests import InterestList
-from resources.individual_interests import IndividualInterestLists
+from resources.individual_interests import IndividualInterestLists, IndividualInterest
 
 api.add_resource(PrefectureList, "/prefectures")
 api.add_resource(Prefecture, "/prefectures/<int:id>")
@@ -27,6 +27,7 @@ api.add_resource(LocationBusinessWishlistList, "/locationwishlists")
 api.add_resource(InterestList, "/interests")
 
 api.add_resource(IndividualInterestLists, "/individualinterests")
+api.add_resource(IndividualInterest, "/individualinterests/<int:id>")
 
 if __name__ == "__main__":
     app.run(port=5555, debug=True)

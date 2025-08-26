@@ -23,3 +23,13 @@ class IndividualInterestLists(Resource):
         
         except ValueError as e:
             return {"message": [str(e)]}
+
+class IndividualInterest(Resource):
+    def delete(self, id):
+        interest = IndividualInterestsModel.query.filter(IndividualInterestsModel.id==id).first()
+        if interest:
+            db.session.delete(interest)
+            db.session.commit()
+            return {}, 204
+        else:
+            return {"message": "Interest nit found"}, 404
