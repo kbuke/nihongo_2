@@ -88,6 +88,15 @@ class User(Resource):
             except ValueError as e:
                 return {"message": [str(e)]}, 400
         return{"message": "User not found"}, 404
+    
+    def delete(self, id):
+        user = UserModel.query.filter(UserModel.id==id).first()
+        if user:
+            db.session.delete(user)
+            db.session.commit()
+            return {"message": f"User {id} deleted."}
+        else:
+            return {"message": f"No user with id: {id} found."}, 404
 
 class IndividualList(Resource):
     def get(self):

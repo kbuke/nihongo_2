@@ -24,7 +24,7 @@ class IndividualModel(UserModel):
 
     # set up relations
         # one-to-many (individual = one)
-    wishlists = db.relationship("WishlistModel", back_populates="individual", lazy="dynamic")
+    wishlists = db.relationship("WishlistModel", back_populates="individual", lazy="dynamic", cascade="all, delete-orphan")
     interests = db.relationship("InterestModel", back_populates="individual", secondary="individual_interests")
 
     # serialise rukes
