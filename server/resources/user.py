@@ -72,6 +72,22 @@ class User(Resource):
             return user.to_dict(), 201
         else:
             return {"message": "User not found"}, 404
+    
+    def patch(self, id):
+        data = request.get_json()
+
+        user = UserModel.query.filter(UserModel.id==id).first()
+
+        if user:
+            try:
+                for attr in data:
+                    setattr(user, attr, data[attr])
+                db.session.add(user)
+                db.session.commit()
+                return make_response(user.to_dict(), 202)
+            except ValueError as e:
+                return {"message": [str(e)]}, 400
+        return{"message": "User not found"}, 404
 
 class IndividualList(Resource):
     def get(self):
