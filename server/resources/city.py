@@ -45,3 +45,28 @@ class CityList(Resource):
             return new_city.to_dict()
         except ValueError as e:
             return {"message": [str(e)]}
+
+class City(Resource):
+    def get(self, id):
+        city = CityModel.query.filter(CityModel.id==id).first()
+        if city:
+            return make_response(city.to_dict(), 201)
+        else:
+            return{"message": f"City {id} not found"}, 404
+    
+    def patch(self, id):
+        data = request.get_json()
+
+        city = CityModel.query.filter(CityModel.id==id).first()
+
+        if city:
+            try:
+                for attr in data:
+                    setattr(city, attr, data[attr])
+                db.session.add(city)
+                db.session.commit()
+                return make_response(city.to_dict())
+            except ValueError as e:
+                return {"message": [str(e)]}
+        else:
+            return {"message": f"City {id} not found"}, 404
