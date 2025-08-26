@@ -23,3 +23,11 @@ class IndustryList(Resource):
             return new_industry.to_dict(), 201
         except ValueError as e:
             return {"error": [str(e)]}
+
+class Industry(Resource):
+    def get(self, id):
+        industry = IndustryModel.query.filter(IndustryModel.id==id).first()
+        if industry:
+            return make_response(industry.to_dict())
+        else:
+            return {"message": f"Industry {id} not found"}, 404

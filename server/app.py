@@ -9,7 +9,7 @@ from resources.location_business_wishlist import LocationBusinessWishlistList
 from resources.interests import InterestList
 from resources.individual_interests import IndividualInterestLists, IndividualInterest
 from resources.business_interests import BusinessInterestList
-from resources.industry import IndustryList
+from resources.industry import IndustryList, Industry
 from resources.business_industry import BusinessIndustryList
 
 api.add_resource(PrefectureList, "/prefectures")
@@ -40,6 +40,7 @@ api.add_resource(IndividualInterest, "/individualinterests/<int:id>")
 api.add_resource(BusinessInterestList, "/businessinterests")
 
 api.add_resource(IndustryList, "/industries")
+api.add_resource(Industry, "/industries/<int:id>")
 
 api.add_resource(BusinessIndustryList, "/businessindustries")
 
