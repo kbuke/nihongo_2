@@ -31,6 +31,7 @@ class IndividualModel(UserModel):
     serialize_rules = (
         "-wishlists.individual",
         # "-wishlists.prefecture",
+        "-interests.individual",
     )
 
     __mapper_args__ = {
