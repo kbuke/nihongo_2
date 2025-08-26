@@ -31,3 +31,12 @@ class Industry(Resource):
             return make_response(industry.to_dict())
         else:
             return {"message": f"Industry {id} not found"}, 404
+        
+    def delete(self, id):
+        industry = IndustryModel.query.filter(IndustryModel.id==id).first()
+        if industry:
+            db.session.delete(industry)
+            db.session.commit()
+            return{"message": f"Industry {id} deleted."}
+        else:
+            return{"message": f"Industry {id} not found."}, 404
