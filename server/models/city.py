@@ -28,10 +28,23 @@ class CityModel(db.Model, SerializerMixin):
     serialize_rules = (
         "-prefecture.cities",
         "-prefecture.wishlist",
+        "-prefecture.capital",
+        "-prefecture.intro",
 
         "-businesses.city",
+        "-businesses.wishlist",
+        "-businesses.district_block",
+        "-businesses.email",
+        "-businesses.ac_type",
+        "-businesses.city_id",
+        "-businesses.floor_room",
+        "-businesses.postal_code",
+        "-businesses.building_name",
+        "-businesses.allow_email",
 
-        "-wishlist.city",
+        "-wishlist",
 
         "-sites.city",
+        "-sites.wishlist",
+        "-sites.city_id",
     )

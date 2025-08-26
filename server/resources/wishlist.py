@@ -35,19 +35,5 @@ class WishlistList(Resource):
             return new_wishlist.to_dict(), 201
         except ValueError as e:
             return {"message": [str(e)]}
-
-        # user_id = json.get("user_id")
-
-        # users_wishlists = [wishlist.user_id for wishlist in WishlistList.query.all()]
-
-        # submitted_name = json.get('name')
-
-        # allowed_names = [prefecture.name for prefecture in PrefectureModel.query.all()]
-        # print(allowed_names)
-
-        # if submitted_name in allowed_names:
-        #     submitted_name = submitted_name
-        # else:
-        #     return {"message": "Please enter the name of your wishlist after a prefecture."}, 422
         
 

@@ -30,5 +30,5 @@ class PrefectureModel(db.Model, SerializerMixin):
         "-cities.prefecture",
         "-cities.wishlist",
 
-        "-wishlist.prefecture",
+        "-wishlist",
     )

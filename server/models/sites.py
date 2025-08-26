@@ -20,6 +20,12 @@ class SiteModel(db.Model, SerializerMixin):
     # serialise rules
     serialize_rules = (
         "-city.sites",
+        "-city.wishlist",
+        "-city.businesses",
+        "-city.prefecture.intro",
+        "-city.prefecture.capital",
+        "-city.population",
+        
 
-        "-wishlist.site",
+        "-wishlist",
     )

@@ -53,6 +53,8 @@ class BusinessModel(UserModel):
         # one-to-many w. businesses as the many
     city_id = db.Column(db.ForeignKey("cities.id"))
     city = db.relationship("CityModel", back_populates="businesses")
+
+    
         # many-to-many 
     wishlist = db.relationship("WishlistModel", back_populates="business", secondary="location_business_wishlists")
 

@@ -63,4 +63,13 @@ class UserList(Resource):
             return new_business.to_dict(), 201
         else:
             return {"message": "Please enter a proper account type"}, 401
+        
+class User(Resource):
+    def get(self, id):
+        user = UserModel.query.filter(UserModel.id==id).first()
+        # breakpoint()
+        if user:
+            return user.to_dict(), 201
+        else:
+            return {"message": "User not found"}, 404
     
