@@ -22,8 +22,8 @@ class WishlistModel(db.Model, SerializerMixin):
     individual_id = db.Column(db.ForeignKey("individuals.id"))
     individual = db.relationship("IndividualModel", back_populates="wishlists")
         # many-to-many
-    prefecture = db.relationship("PrefectureModel", back_populates="wishlist", secondary="location_business_wishlists")
-    city = db.relationship("CityModel", back_populates="wishlist", secondary="location_business_wishlists")
+    # prefecture = db.relationship("PrefectureModel", back_populates="wishlist", secondary="location_business_wishlists")
+    # city = db.relationship("CityModel", back_populates="wishlist", secondary="location_business_wishlists")
     business = db.relationship("BusinessModel", back_populates="wishlist", secondary="location_business_wishlists")
     site = db.relationship("SiteModel", back_populates="wishlist", secondary="location_business_wishlists")
 
@@ -38,7 +38,7 @@ class WishlistModel(db.Model, SerializerMixin):
 
 
         "-business.wishlist",
-        "-business.city",
+        # "-business.city",
         "-business.building_name",
         "-business.city_id",
         "-business.email",

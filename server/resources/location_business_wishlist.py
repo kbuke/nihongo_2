@@ -10,25 +10,55 @@ class LocationBusinessWishlistList(Resource):
     def post(self):
         json=request.get_json()
 
-        wishlist_id = json.get("wishlist_id")
-        prefecture_id = json.get("prefecture_id")
-        city_id = json.get("city_id")
+        # wishlist_id = json.get("wishlist_id")
+        # prefecture_id = json.get("prefecture_id")
+        # city_id = json.get("city_id")
         business_id = json.get("business_id")
         sites_id = json.get("sites_id")
 
-        if wishlist_id and prefecture_id and city_id:
-            if business_id or sites_id:
+        if business_id and not sites_id:
+            try:
                 new_wishlist_item = LocationBusinessWishListModel(
-                    prefecture_id=prefecture_id,
-                    city_id=city_id,
                     business_id=business_id,
-                    sites_id=sites_id,
-                    wishlist_id=wishlist_id
+                    sites_id=None,
+                    wishlist_id=json.get("wishlist_id")
                 )
                 db.session.add(new_wishlist_item)
                 db.session.commit()
                 return new_wishlist_item.to_dict(), 201
-            else:
-                return {"message": "Need either a business or site id"}, 422
+            except ValueError as e:
+                return {"message": [str(e)]}
+            
+        elif not business_id and sites_id:
+            try:
+                new_wishlist_item = LocationBusinessWishListModel(
+                    business_id=None,
+                    sites_id=sites_id,
+                    wishlist_id=json.get("wishlist_id")
+                )
+                db.session.add(new_wishlist_item)
+                db.session.commit()
+                return new_wishlist_item.to_dict(), 201
+            except ValueError as e:
+                return {"message": [str(e)]}
         else:
-            return{"message": "Must include a wishlist, city and prefecture id"}, 422
+            return{"message": "Must either have a business or site id"}, 422
+
+        
+
+        # if wishlist_id and prefecture_id and city_id:
+        #     if business_id or sites_id:
+        #         new_wishlist_item = LocationBusinessWishListModel(
+        #             prefecture_id=prefecture_id,
+        #             city_id=city_id,
+        #             business_id=business_id,
+        #             sites_id=sites_id,
+        #             wishlist_id=wishlist_id
+        #         )
+        #         db.session.add(new_wishlist_item)
+        #         db.session.commit()
+        #         return new_wishlist_item.to_dict(), 201
+        #     else:
+        #         return {"message": "Need either a business or site id"}, 422
+        # else:
+        #     return{"message": "Must include a wishlist, city and prefecture id"}, 422

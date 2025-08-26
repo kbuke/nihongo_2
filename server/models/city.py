@@ -19,10 +19,10 @@ class CityModel(db.Model, SerializerMixin):
     prefecture_id = db.Column(db.ForeignKey("prefectures.id"))
     prefecture = db.relationship("PrefectureModel", back_populates="cities")
         # one-to-many where cities are the one
-    businesses = db.relationship("BusinessModel", back_populates="city", lazy="dynamic")
-    sites = db.relationship("SiteModel", back_populates="city", lazy="dynamic")
+    businesses = db.relationship("BusinessModel", back_populates="city", lazy="dynamic", cascade="all, delete-orphan")
+    sites = db.relationship("SiteModel", back_populates="city", lazy="dynamic", cascade="all, delete-orphan")
         # many-to-many
-    wishlist = db.relationship("WishlistModel", back_populates="city", secondary="location_business_wishlists")
+    # wishlist = db.relationship("WishlistModel", back_populates="city", secondary="location_business_wishlists", cascade="all")
 
     # serialise rules
     serialize_rules = (

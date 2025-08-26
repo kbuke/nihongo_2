@@ -70,3 +70,12 @@ class City(Resource):
                 return {"message": [str(e)]}
         else:
             return {"message": f"City {id} not found"}, 404
+    
+    def delete(self, id):
+        city = CityModel.query.filter(CityModel.id==id).first()
+        if city:
+            db.session.delete(city)
+            db.session.commit()
+            return {"message": f"City {id} deleted."}
+        else:
+            return {"message": f"City {id} not found."}, 404

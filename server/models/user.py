@@ -31,7 +31,7 @@ class IndividualModel(UserModel):
     serialize_rules = (
         "-wishlists.individual",
         "-wishlists.business.industry.business",
-        "-wishlists.business.industry.img",
+        "-wishlists.business.industry",
         "-wishlists.business.interests.img",
         # "-wishlists.prefecture",
         "-interests.individual",
