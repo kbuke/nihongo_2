@@ -30,6 +30,9 @@ class IndividualModel(UserModel):
     # serialise rukes
     serialize_rules = (
         "-wishlists.individual",
+        "-wishlists.business.industry.business",
+        "-wishlists.business.industry.img",
+        "-wishlists.business.interests.img",
         # "-wishlists.prefecture",
         "-interests.individual",
     )
@@ -60,6 +63,7 @@ class BusinessModel(UserModel):
         # many-to-many 
     wishlist = db.relationship("WishlistModel", back_populates="business", secondary="location_business_wishlists")
     interests = db.relationship("InterestModel", back_populates="business", secondary="business_interests")
+    industry = db.relationship("IndustryModel", back_populates="business", secondary="business_industries")
 
     __mapper_args__ = {
         "polymorphic_identity": "business",
@@ -68,8 +72,17 @@ class BusinessModel(UserModel):
     # serialise rules
     serialize_rules=(
         "-city.businesses",
+        "-city.sites",
+        "-city.population",
+        "-city.img",
+
+        "-industry.business",
 
         "-wishlist.business",
+        "-wishlist.individual.ac_type",
+        "-wishlist.individual.intro",
+        "-wishlist.prefecture",
+        "-wishlist.site",
 
         "-interests.business",
         "-interests.individual",

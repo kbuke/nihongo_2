@@ -72,4 +72,21 @@ class User(Resource):
             return user.to_dict(), 201
         else:
             return {"message": "User not found"}, 404
-    
+
+class IndividualList(Resource):
+    def get(self):
+        individuals = [individual.to_dict() for individual in IndividualModel.query.all()]
+        return individuals
+
+class Individual(Resource):
+    def get(self, id):
+        individual = IndividualModel.query.filter(IndividualModel.id==id).first()
+        if individual:
+            return individual.to_dict(), 201
+        else:
+            return {"message": "Individual not found"}, 404
+
+class BusinessList(Resource):
+    def get(self):
+        businesses = [business.to_dict() for business in BusinessModel.query.all()]
+        return businesses
